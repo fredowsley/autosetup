@@ -29,31 +29,33 @@ But, before opening the dialogbox, it'll perform the following operations:
 
 ## List
 
-* Visual Studio Code
+* Netcat
 * Python2 and iPython
 * Python3
-* GoLang
+* GoLang 1.8
 * Rbenv
 * JRE & JDK
 * Masscan
-* Chrome
+* Chromium
 * NMAP
-* Drozer Framework
-* Jadx
+* hping3
+* Aircrack-NG
 * Ettercap
 * SQLMAP
 * Yara
 * i3 Window Manager
 * EyeWitness
-* Skype
-* NodeJS
-* Sublime Text 3
+* Kismet
+* Yersinia
+* Macchanger
 * Wireshark
 * Amass
 * Knockpy
 * Dirsearch
 * LinkFinder
-* Virtual Box
+* Metasploit
+* Pixiewps
+* Airgeddon
 
 ## Note
 
