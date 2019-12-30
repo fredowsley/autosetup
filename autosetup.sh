@@ -11,7 +11,7 @@ r='tput sgr0' #Reset colour after echo
 
 # Required dependencies for all softwares (important)
 echo -e "${c}Installing complete dependencies pack."; $r
-sudo apt install -y software-properties-common apt-transport-https build-essential checkinstall libreadline-gplv2-dev libxssl libncursesw5-dev libssl-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev autoconf automake libtool make g++ unzip flex bison gcc libssl-dev libyaml-dev libreadline6-dev zlib1g zlib1g-dev libncurses5-dev libffi-dev libgdbm5 libgdbm-dev libpq-dev libpcap-dev libmagickwand-dev libappindicator3-1 libindicator3-7 imagemagick xdg-utils
+sudo apt install -y software-properties-common apt-transport-https build-essential checkinstall libreadline-gplv2-dev libncursesw5-dev libssl-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev autoconf automake libtool make g++ unzip flex bison gcc libyaml-dev libreadline6-dev zlib1g zlib1g-dev libncurses5-dev libffi-dev libgdbm5 libgdbm-dev libpq-dev libpcap-dev libmagickwand-dev libappindicator3-1 libindicator3-7 imagemagick xdg-utils
 
 # Show Battery Percentage on Top Bar [Debian (gnome)]
 if [ $XDG_CURRENT_DESKTOP == 'GNOME' ]; then
@@ -79,31 +79,33 @@ fi
 
 #Executing Install Dialog
 dialogbox=(whiptail --separate-output --ok-button "Install" --title "Auto Setup Script" --checklist "\nPlease select required software(s):\n(Press 'Space' to Select/Deselect, 'Enter' to Install and 'Esc' to Cancel)" 30 80 20)
-options=(1 "Visual Studio Code" off
+options=(
+		 1 "Netcat" off
 		 2 "Python2 and iPython" off
 		 3 "Python3" off
-		 4 "Go" off
+		 4 "Go v1.8" off
 		 5 "Rbenv" off
 		 6 "JRE & JDK" off
 		 7 "Masscan" off
-		 8 "Chrome" off
+		 8 "Chromium" off
 		 9 "NMAP" off
-		 10 "Drozer Framework" off
-		 11 "Jadx" off
+		 10 "hping3" off
+		 11 "Aircrack-NG" off
 		 12 "Ettercap" off
 		 13 "SQLMAP" off
 		 14 "Yara" off
 		 15 "i3 Window Manager" off
 		 16 "EyeWitness" off
-		 17 "Skype" off
-		 18 "NodeJS" off
-		 19 "Sublime Text 3" off
+		 17 "Kismet" off
+		 18 "Yersinia" off
+		 19 "Macchanger" off
 		 20 "Wireshark" off
-         21 "Amass" off
-         22 "Knockpy" off
-         23 "Dirsearch" off
-         24 "LinkFinder" off
-         25 "Virtual Box" off)
+         	 21 "Amass" off
+         	 22 "Knockpy" off
+         	 23 "Dirsearch" off
+         	 24 "LinkFinder" off
+         	 25 "Metasploit" off
+		 26 "Pixiewps" off
 
 selected=$("${dialogbox[@]}" "${options[@]}" 2>&1 >/dev/tty)
 
@@ -111,14 +113,8 @@ for choices in $selected
 do
 	case $choices in
 		1) 
-		echo -e "${c}Installing Visual Studio Code"; $r
-		curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
-		sudo install -o root -g root -m 644 microsoft.gpg /etc/apt/trusted.gpg.d/
-		sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list'
-		sudo apt update -y
-		sudo apt install -y code
-                sudo rm -f microsoft.gpg
-		echo -e "${c}Visual Studio Code Installed Successfully."; $r
+		echo -e "${c}Installing netcat"; $r
+		sudo apt install -y netcat
 		;;
 
 		2) 
@@ -136,13 +132,8 @@ do
 		;;
 
 		4) 
-		echo -e "${c}Installing Go version 1.12.9"; $r #Change the version if you want.
-		cd
-		wget https://dl.google.com/go/go1.12.9.linux-amd64.tar.gz
-		sudo tar -C /usr/local -xzf go1.12.9.linux-amd64.tar.gz
-		sudo rm -f go1.12.9.linux-amd64.tar.gz
-		echo "export PATH=$PATH:/usr/local/go/bin" >> ~/.profile
-		source ~/.profile
+		echo -e "${c}Installing Go version 1.8"; $r #Change the version if you want.
+		sudo apt install -y golang-1.8
 		echo -e "${c}Verifying Go Installation"; $r
 		( set -x ; go version )
 		echo -e "${c}Go Installed Successfully."; $r
@@ -185,12 +176,8 @@ do
 		;;
 
 		8) 
-		echo -e "${c}Installing Chrome"; $r
-		cd
-		wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-		sudo dpkg -i google-chrome-stable_current_amd64.deb
-		sudo apt --fix-broken install -y
-		rm -f google-chrome-stable_current_amd64.deb
+		echo -e "${c}Installing Chromium"; $r
+		sudo apt install -y chromium-browser
 		;;
 
 		9) 
@@ -199,21 +186,13 @@ do
 		;;
 
 		10) 
-		echo -e "${c}Installing Drozer Framework"; $r
-		wget https://github.com/mwrlabs/drozer/releases/download/2.4.4/drozer_2.4.4.deb
-		sudo dpkg -i drozer_2.4.4.deb
-		sudo apt install -y -f
-		rm -f drozer_2.4.4.deb
-		echo -e "${c}Drozer Framework Installed Successfully."; $r
+		echo -e "${c}Installing hping3"; $r
+		sudo apt install -y hping3
 		;;
 
 		11) 
-		echo -e "${c}Installing JADX"; $r
-		cd && cd tools
-		git clone --depth 1 https://github.com/skylot/jadx.git
-		cd jadx
-		./gradlew dist
-		echo -e "${c}JADX Installed Successfully."; $r
+		echo -e "${c}Installing Aircrack-ng"; $r
+		sudo apt install -y aircrack-ng
 		;;
 
 		12) 
@@ -258,28 +237,26 @@ do
 		;;
 
 		17) 
-		echo -e "${c}Installing Skype"; $r
-		wget https://go.skype.com/skypeforlinux-64.deb
-		sudo apt install -y ./skypeforlinux-64.deb
-		rm -f skypeforlinux-64.deb
-		echo -e "${c}Skype Installed Successfully."; $r
+		echo -e "${c}Installing Kismet"; $r
+		cd && cd tools
+		git clone https://www.kismetwireless.net/git/kismet.git
+		cd kismet
+		sudo ./configure
+		sudo make -j 2
+		sudo make suidinstall
+		sudo usermod -aG kismet $USER
+		echo -e "${c}Kistmet Installed in $HOME/tools/kismet - LOGOUT/IN before using"; $r
 		;;
 
 		18) 
-		echo -e "${c}Installing NodeJS"; $r
-		cd
-		curl -sL https://deb.nodesource.com/setup_12.x | sudo bash - #Submit the version according to your need.
-		sudo apt install -y nodejs
-		( set -x; nodejs -v )
-		echo -e "${c}NodeJS Installed Successfully."; $r
+		echo -e "${c}Installing Yersinia"; $r
+		sudo apt install -y yersinia
+		echo -e "${c}Yersinia Installed Successfully."; $r
 		;;
 
 		19) 
-		echo -e "${c}Installing Sublime Text 3"; $r
-		wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
-		echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
-		sudo apt update -y
-		sudo apt install -y sublime-text
+		echo -e "${c}Installing Macchanger"; $r
+		sudo apt install -y macchanger
 		;;
 
 		20) 
@@ -314,19 +291,24 @@ do
  		;;
 
  		24)
-        echo -e "${c}Installing LinkFinder in $HOME/tools"; $r
-        cd && cd tools
-        git clone --depth 1 https://github.com/GerbenJavado/LinkFinder.git
-        cd LinkFinder
-        sudo pip install argparse jsbeautifier
-        sudo python setup.py install
-        echo -e "${c}LinkFinder Installed Successfully."; $r
-        ;;
+        	echo -e "${c}Installing LinkFinder in $HOME/tools"; $r
+       		cd && cd tools
+        	git clone --depth 1 https://github.com/GerbenJavado/LinkFinder.git
+        	cd LinkFinder
+        	sudo pip install argparse jsbeautifier
+        	sudo python setup.py install
+        	echo -e "${c}LinkFinder Installed Successfully."; $r
+        	;;
 
 		25)
-		echo -e "${c}Installing VirtualBox"; $r
-		sudo apt install -y virtualbox
-		;;	    
+		echo -e "${c}Installing Metasploit"; $r
+		sudo apt install -y 
+		;;	
+		
+		26)
+		echo -e "${c}Installing Pixiewps"; $r
+		sudo apt install -y pixiewps
+		;;
 	esac
 done
 
