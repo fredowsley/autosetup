@@ -112,6 +112,7 @@ options=(
          	 25 "Metasploit" off
 		 26 "Pixiewps" off
 		 27 "Airgeddon" off
+		 28 "Osmedeus" off
 
 selected=$("${dialogbox[@]}" "${options[@]}" 2>&1 >/dev/tty)
 
@@ -328,6 +329,15 @@ do
 		cd && cd tools
 		git clone -depth 1 https://github.com/v1s1t0r1sh3r3/airgeddon.git
 		echo -e "${c}Airgeddon Installed Successfully."; $r
+		;;
+		
+		28)
+		echo -e "${c}Installing Osmedeus"; $r
+		cd && cd tools
+		git clone -depth 1 https://github.com/j3ssie/Osmedeus
+		cd Osmedeus
+		sudo ./install.sh
+		echo -e "${c}Osmedeus Installed Successfully."; $r
 		;;
 	esac
 done
