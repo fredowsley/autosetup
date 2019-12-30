@@ -4,7 +4,7 @@
 # Original Author: Shubham Pathak 								 #
 # Edits for autosetup-rpi by Fred Owsley 							 #
 # Description: Auto setup bash script to setup required programs after doing fresh install.      # 
-# Tested against Debian based distributions like Ubuntu 16.04/18.04 and Kali Linux.              #        
+# Tested against Raspbian Stretch and Buster					                 #        
 ##################################################################################################
 
 c='\e[32m' # Coloured echo (Green)
@@ -12,7 +12,11 @@ r='tput sgr0' #Reset colour after echo
 
 # Required dependencies for all softwares (important)
 echo -e "${c}Installing complete dependencies pack."; $r
-sudo apt install -y software-properties-common apt-transport-https build-essential checkinstall libreadline-gplv2-dev libncursesw5-dev libssl-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev autoconf automake libtool make g++ unzip flex bison gcc libyaml-dev libreadline6-dev zlib1g zlib1g-dev libncurses5-dev libffi-dev libgdbm5 libgdbm-dev libpq-dev libpcap-dev libmagickwand-dev libappindicator3-1 libindicator3-7 imagemagick xdg-utils
+sudo apt install -y software-properties-common apt-transport-https build-essential checkinstall \
+libreadline-gplv2-dev libncursesw5-dev libssl-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev \
+autoconf automake libtool make g++ unzip flex bison gcc libyaml-dev libreadline6-dev zlib1g zlib1g-dev \
+libncurses5-dev libffi-dev libgdbm5 libgdbm-dev libpq-dev libpcap-dev libmagickwand-dev libappindicator3-1 \
+libindicator3-7 imagemagick xdg-utils
 
 # Show Battery Percentage on Top Bar [Debian (gnome)]
 if [ $XDG_CURRENT_DESKTOP == 'GNOME' ]; then
@@ -107,6 +111,7 @@ options=(
          	 24 "LinkFinder" off
          	 25 "Metasploit" off
 		 26 "Pixiewps" off
+		 27 "Airgeddon" off
 
 selected=$("${dialogbox[@]}" "${options[@]}" 2>&1 >/dev/tty)
 
@@ -303,12 +308,26 @@ do
 
 		25)
 		echo -e "${c}Installing Metasploit"; $r
-		sudo apt install -y 
+		cd && cd tools
+		git clone --depth 1 https://github.com/rapid7/metasploit-framework.git
+		sudo chown -R `whoami` metasploit-framework
+		cd metasploit-framework 
+		gem install bundler
+		bundle install
+		echo -e "${c}Metasploit Installed Successfully."; $r
 		;;	
 		
 		26)
 		echo -e "${c}Installing Pixiewps"; $r
 		sudo apt install -y pixiewps
+		echo -e "${c}Pixiewps Installed Successfully."; $r
+		;;
+		
+		27)
+		echo -e "${c}Installing Airgeddon"; $r
+		cd && cd tools
+		git clone -depth 1 https://github.com/v1s1t0r1sh3r3/airgeddon.git
+		echo -e "${c}Airgeddon Installed Successfully."; $r
 		;;
 	esac
 done
