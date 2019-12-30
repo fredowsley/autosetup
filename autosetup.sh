@@ -1,7 +1,8 @@
 #!/bin/bash
 
 ##################################################################################################
-# Author: Shubham Pathak                                                                         # 
+# Original Author: Shubham Pathak 								 #
+# Edits for autosetup-rpi by Fred Owsley 							 #
 # Description: Auto setup bash script to setup required programs after doing fresh install.      # 
 # Tested against Debian based distributions like Ubuntu 16.04/18.04 and Kali Linux.              #        
 ##################################################################################################
