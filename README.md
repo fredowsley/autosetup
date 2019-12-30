@@ -1,5 +1,5 @@
-# autosetup
-Auto setup is a simple bash script (compatible with Debian based distributions like Ubuntu and Kali) to install and setup necessary softwares/tools after doing Fresh Install.
+# autosetup-rpi
+Autosetup-rpi is a Raspberry Pi-focused fork of Auto Setup, a simple bash script (compatible with Debian based distributions like Ubuntu and Kali) to install and setup necessary softwares/tools after doing Fresh Install.
 
 > Script is completely based on InfoSec/Bug Bounty reconnaissance tools as well as some apps I use regularly like Skype, Chrome etc.
 > You can Modify it according to your need.
@@ -9,7 +9,7 @@ Auto setup is a simple bash script (compatible with Debian based distributions l
 ## Usage
 
 ```bash
-git clone https://github.com/shubhampathak/autosetup.git
+git clone https://github.com/fredowsley/autosetup.git
 cd autosetup
 chmod +x autosetup.sh
 ./autosetup.sh
@@ -20,7 +20,7 @@ Script will show a dialogbox (whiptail), where you can select the software(s) yo
 
 But, before opening the dialogbox, it'll perform the following operations:
 
-1. Install Snap, Curl, wget, DNS-Utils, ADB and Fastboot.
+1. Install Snap, Curl, wget, DNS-Utils.
 2. Setup Git Global Config. (It'll ask for your name and email)*
 3. Install all the required dependencies needed for the list of softwares.
 4. Download [Daniel Miessler's SecLists](https://github.com/danielmiessler/SecLists) in $HOME/tools. (Useful duing recon and hunting)*
@@ -57,7 +57,8 @@ But, before opening the dialogbox, it'll perform the following operations:
 
 ## Note
 
-Tested on Ubuntu 16.04, Ubuntu 18.04, Kali Linux Vagrant boxes, but it should work with other Debian based distributions as well.
+Tested on Raspbian Linux 9 (Stretch), Raspbian Buster, Ubuntu 16.04, Ubuntu 18.04, Kali Linux Vagrant boxes, but it should work with other Debian based distributions as well.
+
 
 ## Contributions
 
