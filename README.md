@@ -9,8 +9,8 @@ Autosetup-rpi is a Raspberry Pi-focused fork of Auto Setup, a simple bash script
 ## Usage
 
 ```bash
-git clone https://github.com/fredowsley/autosetup.git
-cd autosetup
+git clone https://github.com/fredowsley/autosetup-rpi.git
+cd autosetup-rpi
 chmod +x autosetup.sh
 ./autosetup.sh
 ```
