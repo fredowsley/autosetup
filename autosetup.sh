@@ -92,6 +92,22 @@ else
  	echo -e "${c}Skipping!"; $r && :
 fi
 
+calc_wt_size() {
+  # NOTE: it's tempting to redirect stderr to /dev/null, so supress error 
+  # output from tput. However in this case, tput detects neither stdout or 
+  # stderr is a tty and so only gives default 80, 24 values
+  WT_HEIGHT=17
+  WT_WIDTH=$(tput cols)
+
+  if [ -z "$WT_WIDTH" ] || [ "$WT_WIDTH" -lt 60 ]; then
+    WT_WIDTH=80
+  fi
+  if [ "$WT_WIDTH" -gt 178 ]; then
+    WT_WIDTH=120
+  fi
+  WT_MENU_HEIGHT=$(($WT_HEIGHT-7))
+}
+
 do_netcat() {
 		echo -e "${c}Installing netcat"; $r
 		sudo apt install -y netcat
@@ -327,6 +343,11 @@ do_and() {
 #sudo apt update && sudo apt upgrade -y
 #sudo apt --fix-broken install -y
 
+#
+# Interactive Loop
+#
+
+calc_wt_size
 while true; do
   FUN=$(whiptail --title "Autosetup.sh Rapspberry Pi Edition" --menu "Installation Options" $WT_HEIGHT $WT_WIDTH $WT_MENU_HEIGHT --cancel-button Finish --ok-button Select \
     "1 Netcat" "The TCP/IP swiss army knife." \
