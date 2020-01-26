@@ -11,7 +11,7 @@ c='\e[32m' # Coloured echo (Green)
 r='tput sgr0' #Reset colour after echo
 
 echo -e " "
-echo -e "  _         _                 _                                _  "
+echo -e "   _         _                 _                                _  "
 echo -e "  /_\  _   _| |_ ___  ___  ___| |_ _   _ _ __        _ __ _ __ (_)"
 echo -e " //_\\| | | | __/ _ \/ __|/ _ \ __| | | | '_ \ _____| '__| '_ \| |"
 echo -e "/  _  \ |_| | || (_) \__ \  __/ |_| |_| | |_) |_____| |  | |_) | |"
