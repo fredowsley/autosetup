@@ -114,10 +114,9 @@ do_netcat() {
 }
 
 do_py2() { 
-		echo -e "${c}Installing Python2 and iPython"; $r
+		echo -e "${c}Installing Python2"; $r
 		sudo apt install -y python-pip
 		( set -x ; pip --version )
-		sudo pip install ipython
 }
 
 do_py3() {
@@ -127,6 +126,11 @@ do_py3() {
 		( set -x ; python3 --version )
 }
 
+do_ipy() {
+		echo -e "${c}Installing iPython"; $r
+		sudo pip install ipython
+}
+		
 do_go() { 
 		echo -e "${c}Installing Go version 1.8"; $r #Change the version if you want.
 		sudo apt install -y golang-1.8
@@ -162,7 +166,7 @@ do_java() {
 		echo -e "${c}Java Installed Successfully!"; $r
 }
 
-do_masscan() {
+do_mass() {
 		echo -e "${c}Installing Masscan in $HOME/tools/masscan"; $r
 		cd && cd tools
 		git clone --depth 1 https://github.com/robertdavidgraham/masscan
@@ -286,7 +290,7 @@ do_dir() {
  		echo -e "${c}Dirsearch Downloaded."; $r
  }
 
- do_lf() {
+do_lf() {
  
  		echo -e "${c}Installing LinkFinder in $HOME/tools"; $r
        		cd && cd tools
@@ -351,11 +355,11 @@ calc_wt_size
 while true; do
   FUN=$(whiptail --title "Autosetup.sh Rapspberry Pi Edition" --menu "Installation Options" $WT_HEIGHT $WT_WIDTH $WT_MENU_HEIGHT --cancel-button Finish --ok-button Select \
     "1 Netcat" "The TCP/IP swiss army knife." \
-    "2 Python2 and iPython" "Hiss" \
+    "2 Python2" "Hiss" \
     "3 Python3" "Hisss" \
-    "4 Go v1.8" "Go." \
+    "4 iPython" "iPython" \
     "5 Rbenv" "Ruby" \
-    "6 JRE & JDK" "Java" \ 
+    "6 Go v1.8" "Go." \
     "7 Masscan" "Massscan" \
     "8 Chromium" "Chrome clone" \
     "9 NMAP" "Network Mapper" \
@@ -363,13 +367,13 @@ while true; do
     "11 Aircrack-NG" "Aircrack" \
     "12 Ettercap" "Ettercap" \
     "13 SQLMAP" "SQL Mapper" \
-    "14 Yara" "Yet Another Rule Analyzer" \ 
+    "14 Yara" "Yet Another Rule Analyzer" \
     "15 i3 Window Manager" "Small Window Manager" \
     "16 EyeWitness" "EyeWitness" \
     "17 Kismet" "The wireless scanner." \
     "18 Yersinia" "Yersinia" \
-    "19 Macchanger" "MAC Address changer" \ 
-    "20 Wireshark" "Wireshark, aka Ethereal" \ 
+    "19 Macchanger" "MAC Address changer" \
+    "20 Wireshark" "Wireshark, aka Ethereal" \
     "21 Amass" "Amass" \
     "22 Knockpy" "Knockpy" \
     "23 Dirsearch" "Directory Searcher" \
@@ -378,7 +382,7 @@ while true; do
     "26 Pixiewps" "Pixie WPS attack" \
     "27 Airgeddon" "All the wifi tools in one place" \
     "28 Osmedeus" "Osmedeus" \
-    "29 Android Utils, ADB, fastboot" "Android Stuff" \
+    "29 Android" "Android Utils, ADB, fastboot, etc." \
     
     3>&1 1>&2 2>&3)
   RET=$?
@@ -390,10 +394,10 @@ while true; do
       1\ *) do_netcat ;;
       2\ *) do_py2 ;;
       3\ *) do_py3 ;;
-      4\ *) do_go ;;
+      4\ *) do_ipy ;;
       5\ *) do_rbenv ;;
-      6\ *) do_java ;;
-      7\ *) do_masscan ;;
+      6\ *) do_go ;;
+      7\ *) do_mass ;;
       8\ *) do_chromium ;;
       9\ *) do_nmap ;;
       10\ *) do_hping ;;
