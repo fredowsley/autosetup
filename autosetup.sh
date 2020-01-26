@@ -14,14 +14,9 @@ r='tput sgr0' #Reset colour after echo
 echo -e "${c}Installing complete dependencies pack."; $r
 sudo apt install -y software-properties-common apt-transport-https build-essential checkinstall \
 libreadline-gplv2-dev libncursesw5-dev libssl-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev \
-autoconf automake libtool make g++ unzip flex bison gcc libyaml-dev libreadline6-dev zlib1g zlib1g-dev \
-libncurses5-dev libffi-dev libgdbm5 libgdbm-dev libpq-dev libpcap-dev libmagickwand-dev libappindicator3-1 \
+autoconf automake libtool make g++ unzip flex bison gcc libyaml-dev libreadline-dev zlib1g zlib1g-dev \
+libncurses5-dev libffi-dev libgdbm-dev libpq-dev libpcap-dev libmagickwand-dev libappindicator3-1 \
 libindicator3-7 imagemagick xdg-utils
-
-# Show Battery Percentage on Top Bar [Debian (gnome)]
-if [ $XDG_CURRENT_DESKTOP == 'GNOME' ]; then
-	gsettings set org.gnome.desktop.interface show-battery-percentage true
-fi
 
 # Upgrade and Update Command
 echo -e "${c}Updating and upgrading before performing further operations."; $r
@@ -62,10 +57,6 @@ sudo apt-get install -y wget curl
 #Installing dig
 echo -e "${c}Installing DNS Utils"; $r
 sudo apt install -y dnsutils
-
-#Installing ADB and Fastboot
-echo -e "${c}Installing ADB and Fastboot"; $r
-sudo apt install -y android-tools-adb android-tools-fastboot
 
 #Creating Directory Inside $HOME
 echo -e "${c}Creating Directory named 'tools' inside $HOME directory."; $r
@@ -113,6 +104,7 @@ options=(
 		 26 "Pixiewps" off
 		 27 "Airgeddon" off
 		 28 "Osmedeus" off
+		 29 "Android Utils, ADB, fastboot" off
 
 selected=$("${dialogbox[@]}" "${options[@]}" 2>&1 >/dev/tty)
 
@@ -338,6 +330,14 @@ do
 		cd Osmedeus
 		sudo ./install.sh
 		echo -e "${c}Osmedeus Installed Successfully."; $r
+		;;
+		
+		29)
+		echo -e "${c}Installing Android Tools"; $r
+		#Installing ADB and Fastboot
+		#echo -e "${c}Installing ADB and Fastboot"; $r
+		#sudo apt install -y android-tools-adb android-tools-fastboot
+		echo -e "${c}Android Tools Installed Successfully."; $r
 		;;
 	esac
 done
