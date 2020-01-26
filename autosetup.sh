@@ -42,7 +42,8 @@ else
 fi
 
 #Setting up Git
-read -p "${c}Do you want to setup Git global config? (y/n): " -r; $r
+echo -e "${c}Do you want to setup Git global config? (y/n)"; $r
+read -p ": " -r;
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
 	echo -e "${c}Setting up Git"; $r
