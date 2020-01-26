@@ -351,21 +351,21 @@ calc_wt_size
 while true; do
   FUN=$(whiptail --title "Autosetup.sh Rapspberry Pi Edition" --menu "Installation Options" $WT_HEIGHT $WT_WIDTH $WT_MENU_HEIGHT --cancel-button Finish --ok-button Select \
     "1 Netcat" "The TCP/IP swiss army knife." \
-    "2 Python2 and iPython" "Hissssss" \
-    "3 Python3" "Hisss^3" \
+    "2 Python2 and iPython" "Hiss" \
+    "3 Python3" "Hisss" \
     "4 Go v1.8" "Go." \
-    "5 Rbenv" " " \
-    "6 JRE & JDK" " " \ 
-    "7 Masscan" " " \
-    "8 Chromium" "Chrome clone " \
+    "5 Rbenv" "Ruby" \
+    "6 JRE & JDK" "Java" \ 
+    "7 Masscan" "Massscan" \
+    "8 Chromium" "Chrome clone" \
     "9 NMAP" "Network Mapper" \
     "10 hping3" "hping" \
     "11 Aircrack-NG" "Aircrack" \
     "12 Ettercap" "Ettercap" \
-    "13 SQLMAP" " " \
+    "13 SQLMAP" "SQL Mapper" \
     "14 Yara" "Yet Another Rule Analyzer" \ 
-    "15 i3 Window Manager" "i3" \
-    "16 EyeWitness" " " \
+    "15 i3 Window Manager" "Small Window Manager" \
+    "16 EyeWitness" "EyeWitness" \
     "17 Kismet" "The wireless scanner." \
     "18 Yersinia" "Yersinia" \
     "19 Macchanger" "MAC Address changer" \ 
@@ -383,7 +383,8 @@ while true; do
     3>&1 1>&2 2>&3)
   RET=$?
   if [ $RET -eq 1 ]; then
-    do_finish
+    echo "done"
+    exit 0
   elif [ $RET -eq 0 ]; then
     case "$FUN" in
       1\ *) do_netcat ;;
