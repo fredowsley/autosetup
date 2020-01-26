@@ -73,7 +73,8 @@ cd
 mkdir -p tools
 
 #Downloading SecLists
-read -p "${c}Do you want to download Daniel Miessler's SecLists (quite useful during recon)?: " -r; $r
+echo -e "${c}Do you want to download Daniel Miessler's SecLists (quite useful during recon)? (y/n)"; $r
+read -p ": " -r;
 if [[ $REPLY =~ ^[Yy]$ ]]; then
 	echo -e "${c}Downloading SecLists in $HOME/tools"; $r
 	cd && cd tools 
