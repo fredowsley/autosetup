@@ -23,15 +23,22 @@ echo -e "${c}Updating and upgrading before performing further operations."; $r
 sudo apt update && sudo apt upgrade -y
 sudo apt --fix-broken install -y
 
-#Snap Installation & Setup
-echo -e "${c}Installing Snap & setting up."; $r
-sudo apt install -y snapd
-sudo systemctl start snapd
-sudo systemctl enable snapd
-sudo systemctl start apparmor
-sudo systemctl enable apparmor
-export PATH=$PATH:/snap/bin
-sudo snap refresh
+#Setting up Git
+read -p "${c}Do you want to install snap? (y/n): " -r; $r
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+	#Snap Installation & Setup
+	echo -e "${c}Installing Snap & setting up."; $r
+	sudo apt install -y snapd
+	sudo systemctl start snapd
+	sudo systemctl enable snapd
+	sudo systemctl start apparmor
+	sudo systemctl enable apparmor
+	export PATH=$PATH:/snap/bin
+	sudo snap refresh
+else
+	echo -e "${c}Skipping!"; $r && :
+fi
 
 #Setting up Git
 read -p "${c}Do you want to setup Git global config? (y/n): " -r; $r
@@ -61,7 +68,7 @@ sudo apt install -y dnsutils
 #Creating Directory Inside $HOME
 echo -e "${c}Creating Directory named 'tools' inside $HOME directory."; $r
 cd
-mkdir tools
+mkdir -p tools
 
 #Downloading SecLists
 read -p "${c}Do you want to download Daniel Miessler's SecLists (quite useful during recon)?: " -r; $r
