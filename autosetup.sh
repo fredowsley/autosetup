@@ -383,7 +383,6 @@ while true; do
     "27 Airgeddon" "All the wifi tools in one place" \
     "28 Osmedeus" "Osmedeus" \
     "29 Android" "Android Utils, ADB, fastboot, etc." \
-    
     3>&1 1>&2 2>&3)
   RET=$?
   if [ $RET -eq 1 ]; then
