@@ -24,7 +24,8 @@ sudo apt update && sudo apt upgrade -y
 sudo apt --fix-broken install -y
 
 #Setting up Git
-read -p "${c}Do you want to install snap? (y/n): " -r; $r
+echo -e "${c}Do you want to install snap? (y/n)"; $r
+read -p ": " -r;
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
 	#Snap Installation & Setup
