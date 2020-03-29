@@ -344,7 +344,7 @@ do_and() {
 do_btmon() {
 		echo -e "${c}Installing Bluetooth Monitor"; $r
 		cd && cd tools
-		sudo apt install -y pi-bluetooth
+		sudo apt install -y pi-bluetooth bluez-hcidump bc
 		wget http://repo.mosquitto.org/debian/mosquitto-repo.gpg.key
 		sudo apt-key add mosquitto-repo.gpg.key
 		cd /etc/apt/sources.list.d/
