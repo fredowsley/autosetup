@@ -23,7 +23,7 @@ echo -e "                                        |_|              |_|      "
 echo -e "${c}Installing complete dependencies pack."; $r
 sudo apt install -y software-properties-common apt-transport-https build-essential checkinstall \
 libreadline-gplv2-dev libncursesw5-dev libssl-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev \
-autoconf automake libtool make g++ unzip flex bison gcc libyaml-dev libreadline-dev zlib1g zlib1g-dev \
+autoconf automake libtool make g++ unzip flex bison gcc libyaml-dev zlib1g zlib1g-dev \
 libncurses5-dev libffi-dev libgdbm-dev libpq-dev libpcap-dev libmagickwand-dev libappindicator3-1 \
 libindicator3-7 imagemagick xdg-utils git
 
@@ -353,7 +353,7 @@ do_btmon() {
 		sudo apt install -y libmosquitto-dev mosquitto mosquitto-clients libmosquitto1
 		git clone git://github.com/andrewjfreyer/monitor
 		cd monitor
-		echo -e "${c}run 'sudo bash monitor.sh'
+		echo -e "${c}run 'sudo bash monitor.sh'"
 		echo -e "${c}Bluetooth Monitor Installed Successfully."; $r
 }
 
