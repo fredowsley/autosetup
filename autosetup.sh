@@ -107,6 +107,14 @@ calc_wt_size() {
   fi
   WT_MENU_HEIGHT=$(($WT_HEIGHT-7))
 }
+do_vim() {
+		echo -e "${c}Installing vim and amix's Basic .vimrc"; $r
+		sudo apt install -y vim
+		cd
+		git clone --depth=1 https://github.com/amix/vimrc.git ~/.vim_runtime
+		sh ~/.vim_runtime/install_basic_vimrc.sh
+
+}
 
 do_netcat() {
 		echo -e "${c}Installing netcat"; $r
@@ -369,36 +377,37 @@ do_btmon() {
 calc_wt_size
 while true; do
   FUN=$(whiptail --title "Autosetup.sh Rapspberry Pi Edition" --menu "Installation Options" $WT_HEIGHT $WT_WIDTH $WT_MENU_HEIGHT --cancel-button Finish --ok-button Select \
-    "1 Netcat" "The TCP/IP swiss army knife." \
-    "2 Python2" "Hiss" \
-    "3 Python3" "Hisss" \
-    "4 iPython" "iPython" \
-    "5 Rbenv" "Ruby" \
-    "6 Go v1.8" "Go." \
-    "7 Masscan" "Massscan" \
-    "8 Chromium" "Chrome clone" \
-    "9 NMAP" "Network Mapper" \
-    "10 hping3" "hping" \
-    "11 Aircrack-NG" "Aircrack" \
-    "12 Ettercap" "Ettercap" \
-    "13 SQLMAP" "SQL Mapper" \
-    "14 Yara" "Yet Another Rule Analyzer" \
-    "15 i3 Window Manager" "Small Window Manager" \
-    "16 EyeWitness" "EyeWitness" \
-    "17 Kismet" "The wireless scanner." \
-    "18 Yersinia" "Yersinia" \
-    "19 Macchanger" "MAC Address changer" \
-    "20 Wireshark" "Wireshark, aka Ethereal" \
-    "21 Amass" "Amass" \
-    "22 Knockpy" "Knockpy" \
-    "23 Dirsearch" "Directory Searcher" \
-    "24 LinkFinder" "Link Finder" \
-    "25 Metasploit" "Popping Shells like its 2001" \
-    "26 Pixiewps" "Pixie WPS attack" \
-    "27 Airgeddon" "All the wifi tools in one place" \
-    "28 Osmedeus" "Osmedeus" \
-    "29 Android" "Android Utils, ADB, fastboot, etc." \
-    "30 Bluetooth Monitor" "BT Presense monitor (https://github.com/andrewjfreyer/monitor)" \
+    "1 vim" "vim and amix's Basic .vimrc" \
+    "2 Netcat" "The TCP/IP swiss army knife." \
+    "3 Python2" "Hiss" \
+    "4 Python3" "Hisss" \
+    "5 iPython" "iPython" \
+    "6 Rbenv" "Ruby" \
+    "7 Go v1.8" "Go." \
+    "8 Masscan" "Massscan" \
+    "9 Chromium" "Chrome clone" \
+    "10 NMAP" "Network Mapper" \
+    "11 hping3" "hping" \
+    "12 Aircrack-NG" "Aircrack" \
+    "13 Ettercap" "Ettercap" \
+    "14 SQLMAP" "SQL Mapper" \
+    "15 Yara" "Yet Another Rule Analyzer" \
+    "16 i3 Window Manager" "Small Window Manager" \
+    "17 EyeWitness" "EyeWitness" \
+    "18 Kismet" "The wireless scanner." \
+    "19 Yersinia" "Yersinia" \
+    "20 Macchanger" "MAC Address changer" \
+    "21 Wireshark" "Wireshark, aka Ethereal" \
+    "22 Amass" "Amass" \
+    "23 Knockpy" "Knockpy" \
+    "24 Dirsearch" "Directory Searcher" \
+    "25 LinkFinder" "Link Finder" \
+    "26 Metasploit" "Popping Shells like its 2001" \
+    "27 Pixiewps" "Pixie WPS attack" \
+    "28 Airgeddon" "All the wifi tools in one place" \
+    "29 Osmedeus" "Osmedeus" \
+    "30 Android" "Android Utils, ADB, fastboot, etc." \
+    "31 Bluetooth Monitor" "BT Presense monitor (https://github.com/andrewjfreyer/monitor)" \
     3>&1 1>&2 2>&3)
   RET=$?
   if [ $RET -eq 1 ]; then
@@ -406,36 +415,37 @@ while true; do
     exit 0
   elif [ $RET -eq 0 ]; then
     case "$FUN" in
-      1\ *) do_netcat ;;
-      2\ *) do_py2 ;;
-      3\ *) do_py3 ;;
-      4\ *) do_ipy ;;
-      5\ *) do_rbenv ;;
-      6\ *) do_go ;;
-      7\ *) do_mass ;;
-      8\ *) do_chromium ;;
-      9\ *) do_nmap ;;
-      10\ *) do_hping ;;
-      11\ *) do_ang ;;
-      12\ *) do_etc ;;
-      13\ *) do_sqlmap ;;
-      14\ *) do_yara ;;
-      15\ *) do_i3 ;;
-      16\ *) do_eyew ;;
-      17\ *) do_kismet ;;
-      18\ *) do_yer ;;
-      19\ *) do_mac ;;
-      20\ *) do_ws ;;
-      21\ *) do_amass ;;
-      22\ *) do_kno ;;
-      23\ *) do_dir ;;
-      24\ *) do_lf ;;
-      25\ *) do_meta ;;
-      26\ *) do_pix ;;
-      27\ *) do_air ;;
-      28\ *) do_osme ;;
-      29\ *) do_and ;;
-      30\ *) do_btmon ;;
+      1\ *) do_vim ;; 
+      2\ *) do_netcat ;;
+      3\ *) do_py2 ;;
+      4\ *) do_py3 ;;
+      5\ *) do_ipy ;;
+      6\ *) do_rbenv ;;
+      7\ *) do_go ;;
+      8\ *) do_mass ;;
+      9\ *) do_chromium ;;
+      10\ *) do_nmap ;;
+      11\ *) do_hping ;;
+      12\ *) do_ang ;;
+      13\ *) do_etc ;;
+      14\ *) do_sqlmap ;;
+      15\ *) do_yara ;;
+      16\ *) do_i3 ;;
+      17\ *) do_eyew ;;
+      18\ *) do_kismet ;;
+      19\ *) do_yer ;;
+      20\ *) do_mac ;;
+      21\ *) do_ws ;;
+      22\ *) do_amass ;;
+      23\ *) do_kno ;;
+      24\ *) do_dir ;;
+      25\ *) do_lf ;;
+      26\ *) do_meta ;;
+      27\ *) do_pix ;;
+      28\ *) do_air ;;
+      29\ *) do_osme ;;
+      30\ *) do_and ;;
+      31\ *) do_btmon ;;
       
       *) whiptail --msgbox "Programmer error: unrecognized option" 20 60 1 ;;
     esac || whiptail --msgbox "There was an error running option $FUN" 20 60 1
