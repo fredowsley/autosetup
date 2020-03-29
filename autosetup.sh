@@ -341,6 +341,21 @@ do_and() {
 		#sudo apt install -y android-tools-adb android-tools-fastboot
 		echo -e "${c}Android Tools Installed Successfully."; $r
 }		
+do_btmon() {
+		echo -e "${c}Installing Bluetooth Monitor"; $r
+		cd && cd tools
+		sudo apt install -y pi-bluetooth
+		wget http://repo.mosquitto.org/debian/mosquitto-repo.gpg.key
+		sudo apt-key add mosquitto-repo.gpg.key
+		cd /etc/apt/sources.list.d/
+		sudo wget http://repo.mosquitto.org/debian/mosquitto-buster.list
+		cd && cd tools
+		sudo apt install -y libmosquitto-dev mosquitto mosquitto-clients libmosquitto1
+		git clone git://github.com/andrewjfreyer/monitor
+		cd monitor
+		echo -e "${c}run 'sudo bash monitor.sh'
+		echo -e "${c}Bluetooth Monitor Installed Successfully."; $r
+}
 
 # Final Upgrade and Update Command
 #echo -e "${c}Updating and upgrading to finish auto-setup script."; $r
@@ -383,6 +398,7 @@ while true; do
     "27 Airgeddon" "All the wifi tools in one place" \
     "28 Osmedeus" "Osmedeus" \
     "29 Android" "Android Utils, ADB, fastboot, etc." \
+    "30 Bluetooth Monitor" "BT Presense monitor (https://github.com/andrewjfreyer/monitor)" \
     3>&1 1>&2 2>&3)
   RET=$?
   if [ $RET -eq 1 ]; then
@@ -419,6 +435,7 @@ while true; do
       27\ *) do_air ;;
       28\ *) do_osme ;;
       29\ *) do_and ;;
+      30\ *) do_btmon ;;
       
       *) whiptail --msgbox "Programmer error: unrecognized option" 20 60 1 ;;
     esac || whiptail --msgbox "There was an error running option $FUN" 20 60 1
